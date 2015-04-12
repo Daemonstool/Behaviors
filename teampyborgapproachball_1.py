@@ -105,7 +105,7 @@ class TeamPyborgApproachball_x(basebehavior.behaviorimplementation.BehaviorImple
         # monitors walking
         # stops if the ball is at the edge of the view
         elif self.state == "WALK":  
-			# first rotate towards to the ball and re-adjust the yaw to the center
+	    # first rotate towards to the ball and re-adjust the yaw to the center
             if self.firstWalk:
                 self.__nao.walk(0,0,yaw)
                 self.__nao.set_angles(["HeadYaw"],[-yaw],0.01)
@@ -115,7 +115,7 @@ class TeamPyborgApproachball_x(basebehavior.behaviorimplementation.BehaviorImple
             if not self.__nao.isWalking():
                 # calculates how far the NAO is allowed to move as a function of the pitch. (how far the NAO is looking down)
                 dist = (abs(pitch - self.min_pitch))*0.1
-				# if the NAO is not in front of the ball, walk to the left or to the right
+		# if the NAO is not in front of the ball, walk to the left or to the right
                 if not self.within_accuracy(yaw, self.center_yaw, self.acc_look):
                     if yaw < self.center_yaw:
                         if not self.__nao.isWalking():
@@ -123,9 +123,10 @@ class TeamPyborgApproachball_x(basebehavior.behaviorimplementation.BehaviorImple
                     elif yaw > self.center_yaw:
                         if not self.__nao.isWalking():
                             self.__nao.walk(0,0.05,0)
-				# if the NAO is in front of the ball, walk forward using calculated distance. 
+		# if the NAO is in front of the ball, walk forward using calculated distance. 
                 else:
                     self.__nao.walk(dist,0,0)
+            # go back to findball when the ball is lost 
             if (self.within_accuracy(self.position[0], 0.5, acc_walk)==False) or self.position[1] <( 0.5-acc_walk) or (time.time()-self.last_recogtime > 1.5):
                 self.__nao.stopwalk()
                 self.state = "LOOK"
