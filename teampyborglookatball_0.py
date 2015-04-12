@@ -1,6 +1,7 @@
 import basebehavior.behaviorimplementation
 import time
 
+# look behavior updates vision and readjust its head every second
 class TeamPyborgLookatball_x(basebehavior.behaviorimplementation.BehaviorImplementation):
 
     def implementation_init(self):
@@ -26,7 +27,7 @@ class TeamPyborgLookatball_x(basebehavior.behaviorimplementation.BehaviorImpleme
     def implementation_update(self):
     
         self.update_obs()
-		# every second re-adjust the head to where the ball is
+	# every second re-adjust the head to where the ball is
         if (time.time() - self.lastlooktime) > self.lookinterval:
             self.__nao.look_at(self.position[0], self.position[1])
             self.lastlooktime = time.time()
