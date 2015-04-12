@@ -1,6 +1,7 @@
 import basebehavior.behaviorimplementation
 import time
 
+# the parallel behavior which calls two sub-behaviors (look and walk)
 class TeamPyborgApproachball_x(basebehavior.behaviorimplementation.BehaviorImplementation):
 
     def implementation_init(self):
