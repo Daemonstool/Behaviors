@@ -17,6 +17,7 @@ class TeamPyborgWalktoball_x(basebehavior.behaviorimplementation.BehaviorImpleme
         #self.state = "START"
         print "start walk to ball"
         
+    # looks whether var is between two values (val-acc and val+acc)
     def within_accuracy(self, var, val, acc):
         return (var < val+acc and var > val-acc)    
         
@@ -30,30 +31,28 @@ class TeamPyborgWalktoball_x(basebehavior.behaviorimplementation.BehaviorImpleme
             print "Finished walk to ball: Succes"
             return
 
-		# first rotate towards the ball
+	# first rotate towards the ball
         if self.firstWalk:
                 print "first-turn"
                 self.__nao.walk(0,0,yaw)
                 self.__nao.set_angles(['HeadYaw', 'HeadPitch'],[0,0], 0.01)
                 self.firstWalk = False
 
-		# walk left or right when the NAO is not front of the ball
+	# walk left or right when the NAO is not front of the ball
         if not self.within_accuracy(yaw, self.center_yaw, self.acc_look):
             if yaw < self.center_yaw:
                 if not self.state == 1:
                     self.__nao.setWalkTargetVelocity(0,0,0,0)
                     time.sleep(0.2)
                 self.__nao.setWalkTargetVelocity(0,-1, 0, 0.5)
-                #self.__nao.walk(0,-0.05,0)
                 self.state = 1
             elif yaw > self.center_yaw:
                 if not self.state == 2:
                     self.__nao.setWalkTargetVelocity(0,0,0,0)
                     time.sleep(0.2)
                 self.__nao.setWalkTargetVelocity(0, 1, 0, 0.5)
-                #self.__nao.walk(0,0.05,0)
                 self.state = 2
-		# walk forward if the NAO is in front of the NAO
+	# walk forward if the NAO is in front of the NAO
         else:
             if not self.state == 0:
                 self.__nao.setWalkTargetVelocity(0,0,0,0)
