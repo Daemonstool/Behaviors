@@ -29,7 +29,7 @@ class TeamPyborgApproachball_x(basebehavior.behaviorimplementation.BehaviorImple
             self.set_finished()
             return 
         
-        # stop on touch 
+        # stop on touch on tactile head
         if self.m.n_occurs('stop_behaviors') > 0 and not self.m.get_last_observation('stop_behaviors')[1]['restarted']:
             print "Finished approach-ball: stopped on touch"
             self.__nao.stopwalk()
